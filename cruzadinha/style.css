@@ -1,0 +1,385 @@
+/* Estilos Retro Anos 80 para Cruzadinha */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --cor-fundo: #000000;
+  --cor-texto: #00ff00;
+  --cor-borda: #00aa00;
+  --cor-botao: #004400;
+  --cor-botao-hover: #007700;
+  --cor-celula: #001100;
+  --cor-input: #002200;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Efeito de scanline (linhas de varredura) */
+body::before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    transparent 50%, 
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+/* Efeito de brilho verde de monitor CRT */
+body::after {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 150px 5px #00ff00 inset;
+  pointer-events: none;
+  z-index: 1001;
+  opacity: 0.1;
+}
+
+/* Estilização do container principal */
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  border: 4px solid var(--cor-borda);
+  border-style: double;
+  position: relative;
+  z-index: 10;
+}
+
+/* Estilo do título */
+h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5em;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 5px var(--cor-texto);
+  letter-spacing: -1px;
+  color: var(--cor-texto);
+  text-transform: uppercase;
+  padding: 10px;
+  border: 2px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  box-shadow: 0 0 0 4px var(--cor-fundo), 0 0 0 6px var(--cor-borda);
+  animation: piscar 2s infinite;
+}
+
+@keyframes piscar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Estilização das células da cruzadinha */
+table {
+  border-collapse: collapse;
+  margin: 20px 0;
+  border: 3px solid var(--cor-borda);
+  background-color: var(--cor-celula);
+}
+
+td {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid var(--cor-borda);
+  position: relative;
+  font-family: 'VT323', monospace;
+}
+
+/* Estilo para as células pretas */
+.black {
+  background-color: #222222;
+  border: 1px solid var(--cor-borda);
+}
+
+/* Estilização dos inputs da cruzadinha */
+input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 24px;
+  font-family: 'VT323', monospace;
+  background-color: var(--cor-input);
+  color: var(--cor-texto);
+  caret-color: var(--cor-texto);
+  outline: none;
+}
+
+input:focus {
+  box-shadow: 0 0 5px var(--cor-texto) inset;
+  animation: destaque 0.5s infinite alternate;
+}
+
+@keyframes destaque {
+  from { box-shadow: 0 0 2px var(--cor-texto) inset; }
+  to { box-shadow: 0 0 8px var(--cor-texto) inset; }
+}
+
+input::placeholder {
+  font-size: 10px;
+  color: var(--cor-borda);
+  opacity: 0.7;
+}
+
+/* Estilo para os números nas células */
+.number-badge {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--cor-texto);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: 1;
+}
+
+.input-with-number::after {
+  content: attr(data-numbers);
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 10px;
+  color: var(--cor-texto);
+}
+
+/* Estilização das dicas e carrossel */
+.texto {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.dicas {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+  padding: 10px;
+  border: 2px solid var(--cor-borda);
+  background-color: var(--cor-celula);
+}
+
+.carrossel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+#dica-texto {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  text-align: center;
+  color: var(--cor-texto);
+  margin: 0 10px;
+  padding: 5px;
+  flex: 1;
+  min-width: 200px;
+  border: 1px dashed var(--cor-borda);
+  animation: texto-pisca 4s infinite;
+}
+
+@keyframes texto-pisca {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Estilo dos botões */
+button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  background-color: var(--cor-botao);
+  color: var(--cor-texto);
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  border-top: 4px solid #008800;
+  border-left: 4px solid #008800;
+  border-right: 4px solid #003300;
+  border-bottom: 4px solid #003300;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.5);
+  transition: all 0.1s;
+}
+
+button:hover {
+  background-color: var(--cor-botao-hover);
+  color: #ffffff;
+  box-shadow: 0 0 5px var(--cor-texto);
+}
+
+button:active {
+  border-top: 4px solid #003300;
+  border-left: 4px solid #003300;
+  border-right: 4px solid #008800;
+  border-bottom: 4px solid #008800;
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.5);
+}
+
+/* Botões de navegação da dica */
+.carrossel button {
+  font-size: 12px;
+  padding: 5px 10px;
+  width: 40px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botões principais */
+.botao_cruzadinha_iniciar {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  background-color: var(--cor-botao);
+  color: var(--cor-texto);
+  border: none;
+  padding: 12px 25px;
+  margin: 15px 0;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  border-top: 4px solid #008800;
+  border-left: 4px solid #008800;
+  border-right: 4px solid #003300;
+  border-bottom: 4px solid #003300;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.5);
+  letter-spacing: -1px;
+}
+
+.botao_cruzadinha_iniciar:hover {
+  background-color: var(--cor-botao-hover);
+  color: #ffffff;
+  box-shadow: 0 0 8px var(--cor-texto);
+}
+
+.botao_cruzadinha_iniciar:active {
+  border-top: 4px solid #003300;
+  border-left: 4px solid #003300;
+  border-right: 4px solid #008800;
+  border-bottom: 4px solid #008800;
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.5);
+}
+
+/* Informações adicionais */
+.informacoes {
+  text-align: center;
+  margin: 20px 0;
+  padding: 15px;
+  border: 2px dashed var(--cor-borda);
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  line-height: 1.4;
+  background-color: var(--cor-celula);
+  color: var(--cor-texto);
+  max-width: 80%;
+  position: relative;
+}
+
+.informacoes::before,
+.informacoes::after {
+  content: "*";
+  position: absolute;
+  top: 0;
+  color: var(--cor-borda);
+  font-size: 24px;
+}
+
+.informacoes::before {
+  left: 10px;
+}
+
+.informacoes::after {
+  right: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.2em;
+  }
+  
+  .container {
+    padding: 10px;
+    border-width: 3px;
+  }
+  
+  td {
+    width: 30px;
+    height: 30px;
+  }
+  
+  input {
+    font-size: 18px;
+  }
+  
+  .botao_cruzadinha_iniciar {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+  
+  .informacoes {
+    font-size: 16px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1em;
+  }
+  
+  td {
+    width: 25px;
+    height: 25px;
+  }
+  
+  input {
+    font-size: 16px;
+  }
+  
+  button, .botao_cruzadinha_iniciar {
+    font-size: 10px;
+    padding: 8px 15px;
+  }
+}

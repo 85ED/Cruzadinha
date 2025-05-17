@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cruzadinha</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body onload="mostrarDica()">
+    <div class="container">
+        <h1>Cruzadinha Arquitetura Computacional</h1>
+        <div class="conteudo" style="display: none;" id="conteudo">
+          <div id="cruzadinha-container"></div>
+          <div class="texto">
+            <div class="dicas">
+              <div class="carrossel">
+                <button onclick="anteriorDica()">◀</button>
+                <p id="dica-texto">Dica 1</p>
+                <button onclick="proximaDica()">▶</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="informacoes" id="informacoes">
+          Atividade para melhorar a capacidade de Reutilização de Código e entendimento de consumo de códigos de terceiros
+        </div>
+        <button onclick="iniciar()" id="botao_cruzadinha_iniciar" class="botao_cruzadinha_iniciar" >Iniciar Cruzadinha</button>
+        <button onclick="verificarRespostas()" id="botao_cruzadinha_verificar" class="botao_cruzadinha_iniciar" style="display: none;">Finalizar Cruzadinha</button>
+    </div>
+</body>
+</html>
+<script>
+
+  const dicas = [
+    '1: Qual é a sigla para Central Process Unit?',
+    '2: Um circuto digital que realiza operações lógicas e aritméticas. Qual é o nome deste componente?',
+    '3: Tipo de memória que se encontra no topo da hierarquia de memória',
+    '4: Tipo de memória volátil que tem como nome Random Acess Memory. Qual é a sigla deste componente?',
+    '5: Tipo de memória não volátil que oferece dados apenas para leitura',
+    '6: Tipo de memória não volátil que precisa ter seu chip exposto a luz ultravioleta para apagar seu conteúdo',
+    '7: Tipo particular de EEPROM que mantém as informações armazenadas sem a necessidade de uma fonte de energia elétrica',
+    '8: Tipo de memória que precisa ter seu conteúdo copiado na RAM para poder ser executado pela CPU',
+    '9: Permite que periféricos acessem diretamente a RAM sem ocupar processamento',
+    '10: Também conhecido como Slave Select (SS). Usado para selecionar um ou um conjunto de circuitos que estão conectados no computador',
+    '11: Grupo de linhas ou trilhas usadas para se referir a um endereço físico na memória. O número de trilhas determina a quantidade de endereços na memória física',
+    '12: Também chamado de Memory Bus. É responsável para carregar os dados.',
+    '13: Modelo de processador desenvolvido pela Intel qu teve sua primeira versão lançada em setembro de 2009',
+    '14: Modelo de processador desenvolvido pela Intel qu teve sua primeira versão lançada em novembro de 2008',    
+    '15: Tipo de processador que possui dois processadores ou melhor dizendo ‘dois centros, núcleos ou cores de execução‘ no mesmo circuito integrado.  Cada core tem sua própria memória cash e controlador o que permite que funcione mais efetivamente do que um processador single',
+    '16: Segue o mesmo princípio de um dual-core, mas agora em teoria tem o dobro da capacidade de processamento'
+  ];
+
+let indiceDica = 0;
+
+function mostrarDica() {
+    document.getElementById("dica-texto").innerText = dicas[indiceDica];
+}
+
+function proximaDica() {
+    if (indiceDica < dicas.length - 1) {
+        indiceDica++;
+    } else {
+        indiceDica = 0;
+    }
+    mostrarDica();
+}
+
+function anteriorDica() {
+    if (indiceDica > 0) {
+        indiceDica--;
+    } else {
+        indiceDica = dicas.length - 1;
+    }
+    mostrarDica();
+}
+
+</script>
